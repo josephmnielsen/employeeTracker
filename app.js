@@ -52,32 +52,32 @@ const viewAll = () => {
   LEFT JOIN employees manager ON manager.id = employees.manager_id;`, (err, data) => {
     if (err) { console.log(err) }
     console.table(data)
+    mainMenu()
   })
-  mainMenu()
 }
 
 const viewDepartments = () => {
   db.query(`SELECT * FROM departments`, (err, data) => {
     if (err) { console.log(err) }
     console.table(data)
+    mainMenu()
   })
-  mainMenu()
 }
 
 const viewRoles = () => {
   db.query(`SELECT * FROM roles`, (err, data) => {
     if (err) { console.log(err) }
     console.table(data)
+    mainMenu()
   })
-  mainMenu()
 }
 
 const viewEmployees = () => {
   db.query(`SELECT * FROM employees`, (err, data) => {
     if (err) { console.log(err) }
     console.table(data)
+    mainMenu()
   })
-  mainMenu()
 }
 
 
@@ -92,10 +92,10 @@ const addDept = () => {
     db.query('INSERT INTO departments SET ?', res, err => {
       if (err) {console.log(err)}
       console.log('Department added!')
+      mainMenu()
     })
   })
   .catch(err => console.log(err))
-  mainMenu()
 }
 
 const addRole = () => {
@@ -114,7 +114,7 @@ const addRole = () => {
         name: 'department_id',
         message: 'Choose which department this role belongs to:',
         choices: data.map(department => ({
-          name: `${department.title}`,
+          name: `${department.name}`,
           value: department.id
         }))
       }
@@ -124,11 +124,11 @@ const addRole = () => {
       db.query('INSERT INTO roles SET ?', res, err => {
         if (err) { console.log(err) }
         console.log('Role added!')
+        mainMenu()
         })
     })
     .catch(err => console.log(err))
   })
-  mainMenu()
 }
 
 
@@ -174,11 +174,11 @@ const addEmployee = () => {
       db.query('INSERT INTO employees SET ?', res, err => {
         if (err) { console.log(err) }
         console.log('Employee added!')
+        mainMenu()
       })
     })
     .catch(err => console.log(err))
   })
-  mainMenu()
 }
 
 const updateRole = () => {
@@ -211,12 +211,12 @@ const updateRole = () => {
       db.query('UPDATE employees SET role_id = ? WHERE id = ?', [res.newRole, res.employees.id], err => {
         if (err) { console.log(err) }
         console.log('Role updated!')
+        mainMenu()
         })
       })
     .catch(err => console.log(err))
   
   })
-  mainMenu()
 }
 
 mainMenu()
